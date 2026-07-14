@@ -3,9 +3,14 @@
 #pip install openai
 #pip install dotenv
 
-#1. 환경변수 .env 파일의 openai api key 값을 읽어오는 모듈 사용
-from dotenv import load_dotenv
-load_dotenv()
+# #1. 환경변수 .env 파일의 openai api key 값을 읽어오는 모듈 사용
+# from dotenv import load_dotenv
+# load_dotenv()
+
+# 1. api key 읽어오기 - streamlit cloud 의 secret에 저장한 변수
+import streamlit as st
+if "OPENAI_API_KEY" in st.secrets:
+    api_key= st.secrets['OPENAI_API_KEY']
 
 #2. OpenAI 생성형 api를 요청하는 객체생성
 from openai import OpenAI
@@ -78,6 +83,7 @@ if question:
 
 
 
+
 #-------------------------------------------
 #[실행] 터미널에서 streamlit run 파일명.py
 
@@ -95,3 +101,9 @@ if question:
 # 직접 설치는 안되고.. 특정 이름의 문서를 주면 이를 기반으로 자동 설치됨
 # 파이썬의 모듈목록을 저장해놓은 문서 requirements.txt 를 만들고 안에 설치할 모듈목록 등록
 # github에 push...
+
+# 외부 api key 를 사용한다면 역시 에러가 또 발생..
+# .env 파일은 업로드 하면 안되는 비밀파일이기에...
+
+# streamlit cloud에서 배포된 프로젝트마다 사용한 인증키나 비밀번호 같은 정보들을
+# 설정해 놓을 수 있는 기능이 제공됨.
